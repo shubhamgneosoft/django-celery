@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls'
+    'polls',
+    'graphene_django'
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,4 @@ CELERYBEAT_SCHEDULE = {
         "args": (16, 16)
     },
 }
+
