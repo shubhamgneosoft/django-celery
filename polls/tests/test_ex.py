@@ -6,9 +6,7 @@ from django.utils import timezone
 sys.path.append("..")
 
 import pytest
-from django.conf import settings
 from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404
 from polls.models import Question
 
 
@@ -55,23 +53,10 @@ def test_unauthorized(client):
     assert response.status_code == 200
 
 
-@pytest.fixture()
-def fixture_func():
-    print("fixture")
-    return 1
-
-
-def test_one(fixture_func):
-    print("test1")
-    assert 1 == 1
-
-
-def test_two(fixture_func):
-    assert 1 == 1
-
+# @pytest.fixture()
+# def fixture_func():
+#     print("fixture")
+#     return 1
 #
-# @pytest.mark.django_db
-# def test_my_user():
-#     question = get_object_or_404(Question, pk=1)
-#     print(question.question_text)
-#     assert True
+
+

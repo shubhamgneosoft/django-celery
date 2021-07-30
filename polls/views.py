@@ -7,22 +7,45 @@ from .tasks import add_vote
 
 
 def index(request):
+    """
+    List out all questions
+    :param request: request
+    :return:
+    """
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {'latest_question_list': latest_question_list}
     return render(request, 'polls/index.html', context)
 
 
 def detail(request, question_id):
+    """
+    See the choices as per question id and select choice for vote
+    :param request: request
+    :param question_id: int
+    :return: Html Response
+    """
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/detail.html', {'question': question})
 
 
 def results(request, question_id):
+    """
+    See the voting count as per the question
+    :param request: request
+    :param question_id: Int
+    :return: Html Response
+    """
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/results.html', {'question': question})
 
 
 def vote(request, question_id):
+    """
+    Increase the vote count as per questions
+    :param request: request
+    :param question_id: Int
+    :return: Http Response
+    """
     question = get_object_or_404(Question, pk=question_id)
     try:
         print(request.POST['choice'])
@@ -36,8 +59,5 @@ def vote(request, question_id):
     else:
         selected_choice.votes += 1
         selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
         add_vote.delay(question_id, request.POST['choice'])
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
