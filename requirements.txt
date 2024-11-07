@@ -1,0 +1,17 @@
+amqp
+asgiref
+billiard
+celery
+click
+click-didyoumean
+click-plugins
+click-repl
+Django
+kombu
+prompt-toolkit
+pytz
+six
+sqlparse
+vine
+wcwidth
+graphene_django
