@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
 from .models import Question, Choice
-from .tasks import add_vote
+# from .tasks import add_vote
 
 
 def index(request):
@@ -59,5 +59,5 @@ def vote(request, question_id):
     else:
         selected_choice.votes += 1
         selected_choice.save()
-        add_vote.delay(question_id, request.POST['choice'])
+        # add_vote.delay(question_id, request.POST['choice'])
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
